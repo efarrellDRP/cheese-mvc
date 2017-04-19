@@ -1,7 +1,7 @@
 package org.launchcode.controllers;
 
 import org.launchcode.models.Cheese;
-import org.launchcode.models.CheeseData;
+import org.launchcode.models.data.CheeseDao;
 import org.launchcode.models.Category;
 import org.launchcode.models.data.CategoryDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +23,13 @@ import javax.validation.Valid;
 public class CheeseController {
     @Autowired
     private CategoryDao categoryDao;
+    @Autowired
+    private CheeseDao cheeseDao;
     // Request path: /cheese
     @RequestMapping(value = "")
     public String index(Model model) {
 
-        model.addAttribute("cheeses", CheeseData.getAll());
+        model.addAttribute("cheeses", cheeseDao.findAll());
         model.addAttribute("title", "My Cheeses");
 
         return "cheese/index";
@@ -52,13 +54,13 @@ public class CheeseController {
             return "cheese/add";
         }
 
-        CheeseData.add(newCheese);
+        cheeseDao.save(newCheese);
         return "redirect:";
     }
 
     @RequestMapping(value = "remove", method = RequestMethod.GET)
     public String displayRemoveCheeseForm(Model model) {
-        model.addAttribute("cheeses", CheeseData.getAll());
+        model.addAttribute("cheeses", cheeseDao.findAll());
         model.addAttribute("title", "Remove Cheese");
         return "cheese/remove";
     }
@@ -67,7 +69,7 @@ public class CheeseController {
     public String processRemoveCheeseForm(@RequestParam int[] cheeseIds) {
 
         for (int cheeseId : cheeseIds) {
-            CheeseData.remove(cheeseId);
+            cheeseDao.delete(cheeseId);
         }
 
 

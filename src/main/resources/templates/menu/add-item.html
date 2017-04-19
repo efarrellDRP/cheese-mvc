@@ -7,8 +7,9 @@
 <h1 th:text="${title}">Default Title</h1>
 
 <nav th:replace="fragments :: navigation"></nav>
-<form method="post" style="max-width:600px;" th:object="${form}">
-    <label th:for="name">Name</label>
+<form method="post" style="max-width:600px;" th:object="${form}" action="/menu/add-item/">
+    <div>
+    <label th:for="cheeseId">Cheese</label>
     <select name="cheeseId">
         <option th:each="cheese :${form.cheeses}"
                 th:text="${cheese.name}"
@@ -17,6 +18,7 @@
         </option>
 
     </select>
+    </div>
     <input type="hidden" name="menuId" th:value="*{menu.id}" />
     <input type= "submit" value="Add" />
 </form>

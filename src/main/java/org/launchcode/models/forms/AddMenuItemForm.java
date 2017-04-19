@@ -13,20 +13,31 @@ public class AddMenuItemForm {
     private Menu menu;
     private Iterable<Cheese> cheeses;
 
-    public int getMenuId() {
-        return menuId;
-    }
+    @NotNull
+    private int menuId;
 
     @NotNull
-
-    private int menuId;
+    private int cheeseId;
 
     public int getCheeseId() {
         return cheeseId;
     }
 
-    @NotNull
-    private int cheeseId;
+    public void setMenuId(int menuId) {
+        this.menuId = menuId;
+    }
+
+    public void setCheeseId(int cheeseId) {
+        this.cheeseId = cheeseId;
+    }
+
+    public int getMenuId() {
+        return menuId;
+    }
+
+
+
+
 
     public Menu getMenu() {
         return menu;
