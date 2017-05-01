@@ -70,6 +70,7 @@ public class CheeseController {
 
         for (int cheeseId : cheeseIds) {
             cheeseDao.delete(cheeseId);
+
         }
 
 
